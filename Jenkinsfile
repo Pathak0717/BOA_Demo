@@ -17,12 +17,29 @@ pipeline {
                 }
             }
         }
- 
+
+stages {
+        stage('AWS CLI Command') {
+            steps {
+                script {
+                    withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'aws-credentials-id', accessKeyVariable: 'AWS_ACCESS_KEY_ID', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]) {
+                        // Your AWS CLI command here
+                        sh 'aws s3 ls'  // Example AWS CLI command
+                    }
+                }
+            }
+        }
+    }
+
+	    
         stage('Install YAML') {
             steps {
                 script {
                     // Install YAML (Replace this command with the actual YAML installation command)
                 //   sh 'sudo apt-get update && sudo apt-get install -y yaml-package'
+			//curl.exe -LO "https://dl.k8s.io/release/v1.29.0/bin/windows/amd64/kubectl.exe"
+			//aws configure
+			aws eks update-kubeconfig --region ap-southeast-1 --name prodBOA
 						kubectl apply -f ./extras/jwt/jwt-secret.yaml
 						kubectl apply -f ./kubernetes-manifests
                     // Install YAML
