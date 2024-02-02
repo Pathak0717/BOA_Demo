@@ -27,7 +27,7 @@ pipeline {
 			    sh 'unzip v0.6.2.zip -d /home/ec2-user/bank-of-anthos/'
 
 			    // Optional: Remove the downloaded zip file if you don't need it anymore
-				sh 'rm bankofanthos.zip'
+				sh 'rm v0.6.2.zip.zip'
  
                         // Install the YAML file to the Kubernetes cluster
                         dir("${appDir}/bankofanthos") {
