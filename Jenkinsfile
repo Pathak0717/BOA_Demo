@@ -26,6 +26,8 @@ pipeline {
                     //    sh "unzip ${APP_VERSION}"  // Update this line if the app is in a different format
 			    sh 'unzip v0.6.2.zip -d /home/ec2-user/bank-of-anthos/'
 
+			    echo "y" | replace /home/ec2-user/bank-of-anthos/bank-of-anthos-0.6.2/.github/CODEOWNERS
+
 			    // Optional: Remove the downloaded zip file if you don't need it anymore
 				sh 'rm v0.6.2.zip.zip'
  
