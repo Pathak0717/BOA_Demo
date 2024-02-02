@@ -18,19 +18,19 @@ pipeline {
                     def appDir = "/home/ec2-user/bank-of-anthos"
                     dir(appDir) {
                         // Download the app from GitHub release
-                        //sh "curl -LJO ${GITHUB_RELEASE_URL}.zip"
-			 //   sh "curl -O bank-of-anthos.zip ${GITHUB_RELEASE_URL}.zip"
-			    sh 'wget ${applicationUrl}.zip"
+                        //sh "curl -O ${GITHUB_RELEASE_URL}.zip"
+			    sh "curl -O bankofanthos.zip ${GITHUB_RELEASE_URL}.zip"
+			//    sh 'wget ${applicationUrl}.zip"
  
                         // Extract the downloaded app (assuming it's a zip or tar file)
                     //    sh "unzip ${APP_VERSION}"  // Update this line if the app is in a different format
-			    sh 'unzip v0.6.2.zip -d /home/ec2-user/bank-of-anthos/'
+			    sh 'unzip bankofanthos.zip -d /home/ec2-user/bank-of-anthos/'
 
 			    // Optional: Remove the downloaded zip file if you don't need it anymore
-				sh 'rm v0.6.2.zip'
+				sh 'rm bankofanthos.zip'
  
                         // Install the YAML file to the Kubernetes cluster
-                        dir("${appDir}/v0.6.2") {
+                        dir("${appDir}/bankofanthos") {
                             // Assuming kubectl is configured in your Jenkins environment
                            // sh "kubectl apply -f your-app-deployment.yaml"
 						   sh 'kubectl apply -f ./extras/jwt/jwt-secret.yaml'
