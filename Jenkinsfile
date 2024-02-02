@@ -30,7 +30,7 @@ pipeline {
 				sh 'rm v0.6.2.zip.zip'
  
                         // Install the YAML file to the Kubernetes cluster
-                        dir("${appDir}/bankofanthos") {
+                        dir("${appDir}/bank-of-anthos-0.6.2") {
                             // Assuming kubectl is configured in your Jenkins environment
                            // sh "kubectl apply -f your-app-deployment.yaml"
 						   sh 'kubectl apply -f ./extras/jwt/jwt-secret.yaml'
