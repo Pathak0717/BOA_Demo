@@ -21,7 +21,7 @@ pipeline {
                         sh "curl -LJO ${GITHUB_RELEASE_URL}.zip"
  
                         // Extract the downloaded app (assuming it's a zip or tar file)
-                        sh "unzip ${APP_VERSION}.zip"  // Update this line if the app is in a different format
+                        sh "unzip ${APP_VERSION}"  // Update this line if the app is in a different format
  
                         // Install the YAML file to the Kubernetes cluster
                         dir("${appDir}/k8s") {
