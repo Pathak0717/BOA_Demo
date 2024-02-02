@@ -4,7 +4,7 @@ pipeline {
     environment {
         // Define the GitHub release URL and application version
         GITHUB_RELEASE_URL = 'https://github.com/GoogleCloudPlatform/bank-of-anthos/releases/tag/v0.6.2'
-        APP_VERSION = 'bank-of-anthos-v0.6.2'
+        APP_VERSION = 'v0.6.2'
  
         // Define the Kubernetes cluster name
         KUBE_CLUSTER_NAME = 'prodBOA'
@@ -18,7 +18,8 @@ pipeline {
                     def appDir = "${WORKSPACE}/bank-of-anthos"
                     dir(appDir) {
                         // Download the app from GitHub release
-                        sh "curl -LJO ${GITHUB_RELEASE_URL}.zip"
+                        //sh "curl -LJO ${GITHUB_RELEASE_URL}.zip"
+			    sh "curl -LJO bank-of-anthos.zip ${GITHUB_RELEASE_URL}.zip"
  
                         // Extract the downloaded app (assuming it's a zip or tar file)
                         sh "unzip ${APP_VERSION}"  // Update this line if the app is in a different format
