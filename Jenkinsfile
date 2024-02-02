@@ -27,8 +27,8 @@ pipeline {
                         dir("${appDir}/k8s") {
                             // Assuming kubectl is configured in your Jenkins environment
                            // sh "kubectl apply -f your-app-deployment.yaml"
-						   kubectl apply -f ./extras/jwt/jwt-secret.yaml
-							kubectl apply -f ./kubernetes-manifests
+						   sh 'kubectl apply -f ./extras/jwt/jwt-secret.yaml'
+						   sh 'kubectl apply -f ./kubernetes-manifests'
                         }
                     }
                 }
