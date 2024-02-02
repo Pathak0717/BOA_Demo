@@ -18,9 +18,9 @@ pipeline {
                     def appDir = "/home/ec2-user/bank-of-anthos"
                     dir(appDir) {
                         // Download the app from GitHub release
-                        //sh "curl -O ${GITHUB_RELEASE_URL}.zip"
+                      //  sh "curl -O ${GITHUB_RELEASE_URL}.zip"
 			//    sh "curl -O bankofanthos.zip ${GITHUB_RELEASE_URL}.zip"
-			wget ${applicationUrl}.zip
+			sh "wget ${GITHUB_RELEASE_URL}.zip"
  
                         // Extract the downloaded app (assuming it's a zip or tar file)
                     //    sh "unzip ${APP_VERSION}"  // Update this line if the app is in a different format
