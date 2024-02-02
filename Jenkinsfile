@@ -1,54 +1,41 @@
 pipeline {
     agent any
  
+    environment {
+        // Define the GitHub release URL and application version
+        GITHUB_RELEASE_URL = 'https://github.com/GoogleCloudPlatform/bank-of-anthos/releases/tag/v0.6.2'
+        APP_VERSION = 'v0.6.2'
+ 
+        // Define the Kubernetes cluster name
+        KUBE_CLUSTER_NAME = 'prodBOA'
+    }
+ 
     stages {
-        stage('Download and Install Application') {
+        stage('Download and Install App') {
             steps {
                 script {
-                    // Define application release URL
-                    def applicationUrl = 'https://github.com/GoogleCloudPlatform/bank-of-anthos/releases/tag/v0.6.2'
+                    // Create a directory for the app
+                    def appDir = "${WORKSPACE}/bank-of-anthos"
+                    dir(appDir) {
+                        // Download the app from GitHub release
+                        sh "curl -LJO ${GITHUB_RELEASE_URL}.zip"
  
-                    // Download and extract the application
-                    sh "wget ${applicationUrl} -O bank-of-anthos-0.6.2.zip"
-                    sh 'unzip bank-of-anthos.zip -d bank-of-anthos-0.6.2'
+                        // Extract the downloaded app (assuming it's a zip or tar file)
+                        sh "unzip $bank-of-anthos-{APP_VERSION}.zip"  // Update this line if the app is in a different format
  
-                    // Clean up the zip file
-                    sh 'rm bank-of-anthos-0.6.2.zip'
-                }
-            }
-        }
-
-stages {
-        stage('AWS CLI Command') {
-            steps {
-                script {
-                    withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'aws-credentials-id', accessKeyVariable: 'AWS_ACCESS_KEY_ID', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]) {
-                        // Your AWS CLI command here
-                        sh 'aws s3 ls'  // Example AWS CLI command
+                        // Install the YAML file to the Kubernetes cluster
+                        dir("${appDir}/k8s") {
+                            // Assuming kubectl is configured in your Jenkins environment
+                           // sh "kubectl apply -f your-app-deployment.yaml"
+						   kubectl apply -f ./extras/jwt/jwt-secret.yaml
+							kubectl apply -f ./kubernetes-manifests
+                        }
                     }
                 }
             }
         }
-    }
-
-	    
-        stage('Install YAML') {
-            steps {
-                script {
-                    // Install YAML (Replace this command with the actual YAML installation command)
-                //   sh 'sudo apt-get update && sudo apt-get install -y yaml-package'
-			//curl.exe -LO "https://dl.k8s.io/release/v1.29.0/bin/windows/amd64/kubectl.exe"
-			//aws configure
-			aws eks update-kubeconfig --region ap-southeast-1 --name prodBOA
-						kubectl apply -f ./extras/jwt/jwt-secret.yaml
-						kubectl apply -f ./kubernetes-manifests
-                    // Install YAML
-                   // sh yamlInstallationCommand
-                }
-            }
-        }
  
-         stage('Execute JMeter Script') {
+          stage('Execute JMeter Script') {
             steps {
                 script {
                     // Replace 'your_jmeter_script_path' with the actual path to your JMeter script
@@ -67,8 +54,8 @@ stages {
             }
         }
     }
- 
-    post {
+
+post {
         success {
             echo 'Pipeline succeeded.'
         }
