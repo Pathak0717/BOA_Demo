@@ -20,7 +20,7 @@ pipeline {
                         // Download the app from GitHub release
                         //sh "curl -O ${GITHUB_RELEASE_URL}.zip"
 			//    sh "curl -O bankofanthos.zip ${GITHUB_RELEASE_URL}.zip"
-			sh 'wget ${applicationUrl}.zip'
+			wget ${applicationUrl}.zip
  
                         // Extract the downloaded app (assuming it's a zip or tar file)
                     //    sh "unzip ${APP_VERSION}"  // Update this line if the app is in a different format
