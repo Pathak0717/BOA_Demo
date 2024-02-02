@@ -20,7 +20,7 @@ pipeline {
                         // Download the app from GitHub release
                       //  sh "curl -O ${GITHUB_RELEASE_URL}.zip"
 			//    sh "curl -O bankofanthos.zip ${GITHUB_RELEASE_URL}.zip"
-			sh "wget ${GITHUB_RELEASE_URL}.zip"
+			sh 'wget "https://github.com/GoogleCloudPlatform/bank-of-anthos/archive/refs/tags/v0.6.2.zip"'
  
                         // Extract the downloaded app (assuming it's a zip or tar file)
                     //    sh "unzip ${APP_VERSION}"  // Update this line if the app is in a different format
