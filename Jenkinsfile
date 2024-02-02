@@ -3,7 +3,7 @@ pipeline {
  
     environment {
         // Define the GitHub release URL and application version
-        GITHUB_RELEASE_URL = 'https://github.com/GoogleCloudPlatform/bank-of-anthos/archive/refs/tags/v0.6.2.zip'
+        GITHUB_RELEASE_URL = 'https://github.com/GoogleCloudPlatform/bank-of-anthos/archive/refs/tags/v0.6.2'
         APP_VERSION = 'v0.6.2'
  
         // Define the Kubernetes cluster name
