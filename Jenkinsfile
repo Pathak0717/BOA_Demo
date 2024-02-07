@@ -20,13 +20,13 @@ pipeline {
                         // Download the app from GitHub release
                       //  sh "curl -O ${GITHUB_RELEASE_URL}.zip"
 			//    sh "curl -O bankofanthos.zip ${GITHUB_RELEASE_URL}.zip"
-			sh 'wget -nc "https://github.com/GoogleCloudPlatform/bank-of-anthos/archive/refs/tags/v0.6.2.zip"'
+		//	sh 'wget -nc "https://github.com/GoogleCloudPlatform/bank-of-anthos/archive/refs/tags/v0.6.2.zip"'
  
                         // Extract the downloaded app (assuming it's a zip or tar file)
                     //    sh "unzip ${APP_VERSION}"  // Update this line if the app is in a different format
-			    sh 'unzip v0.6.2.zip -d /home/ec2-user/bank-of-anthos/'
+			//    sh 'unzip v0.6.2.zip -d /home/ec2-user/bank-of-anthos/'
 			//sh 'yes | cp -rf bank-of-anthos-0.6.2/* /home/ec2-user/bank-of-anthos/bank-of-anthos-0.6.2'
-			    sh 'yes | cp -rf /home/ec2-user/bank-of-anthos/bank-of-anthos-0.6.2/.github/CODEOWNERS /home/ec2-user/bank-of-anthos/bank-of-anthos-0.6.2/'
+			//    sh 'yes | cp -rf /home/ec2-user/bank-of-anthos/bank-of-anthos-0.6.2/.github/CODEOWNERS /home/ec2-user/bank-of-anthos/bank-of-anthos-0.6.2/'
 			    // Optional: Remove the downloaded zip file if you don't need it anymore
 				sh 'rm v0.6.2.zip'
  
